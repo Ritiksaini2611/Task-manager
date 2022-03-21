@@ -1,3 +1,7 @@
+window.onload = function () {
+   displayTask();
+};
+
 // creating a variable
 
 const input = document.querySelector("input");
@@ -10,6 +14,8 @@ const clear = document.querySelector("clear");
 function addTask() {
    if (input.value != "") {
       addTaskToLS();
+      todoList.innerHTML = "";
+      displayTask();
    } else {
       alert("Please enter a task");
    }
@@ -32,7 +38,9 @@ function addTaskToLS() {
    input.value = "";
 }
 
-function DisplayTask() {
+//display tasks
+
+function displayTask() {
    let tasks;
    if (localStorage.getItem("tasks") === null) {
       tasks = [];
@@ -51,5 +59,38 @@ function DisplayTask() {
       checkBtn.innerHTML = `<i class="fa-solid fa-check"></i>`;
       delBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
       complete.textContent = "completed";
+
+      newLi.appendChild(document.createTextNode(task));
+      newLi.appendChild(checkBtn);
+      newLi.appendChild(delBtn);
+      todoList.appendChild(newLi);
+
+      //task completed
+
+      checkBtn.addEventListener("click", () => {
+         newLi.appendChild(complete);
+      });
+
+      delBtn.addEventListener("click", deleteTask);
    });
+}
+
+//delete task
+
+function deleteTask(index) {
+   let tasks;
+   const del = confirm("you are deleting a task");
+
+   if (del == true) {
+      if (localStorage.getItem("tasks") === null) {
+         tasks = [];
+      } else {
+         tasks = JSON.parse(localStorage.getItem("tasks"));
+      }
+   }
+
+   tasks.splice(index, 1);
+   localStorage.setItem("tasks", JSON.stringify(tasks));
+   todoList.innerHTML = "";
+   displayTask();
 }
