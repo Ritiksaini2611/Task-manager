@@ -24,7 +24,7 @@ body {
 }
 
 .add-item {
-   background-color: #892cdc;
+   background-color: #008f7a;
    padding: 5rem 0;
    margin: 2rem auto;
    border: 1px solid transparent;
@@ -54,7 +54,8 @@ body {
 }
 
 .add-item form button {
-   width: 10%;
+   width: 6rem;
+   height: 4rem;
    font-size: 1.6rem;
    border: 1px solid transparent;
    border-radius: 5px;
